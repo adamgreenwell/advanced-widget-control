@@ -1,0 +1,19 @@
+.about-wrap .widgetcontrol-features-button{
+	font-size: 16px;
+	height: auto;
+	padding: 8px 25px;
+	margin-top: 20px;
+}
+.widgetcontrol-about-wrap.about-wrap p{
+	max-width: 100%;
+}
+
+.about-wrap .widgetcontrol-features{
+	img{
+		@include transition( opacity .15s ease-in-out );
+		@include opacity( 0.88 );
+		&:hover{
+			@include opacity( 1 );
+		}
+	}
+}
