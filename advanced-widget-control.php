@@ -2,13 +2,19 @@
 /**
  * Plugin Name: Advanced Widget Control
  * Description: Additional widget options for better widget management, placement and manipulation.
- * Version: 1.0
+ * Version: 1.0.1
  * Author: Adam Greenwell
  * Text Domain: advanced-widget-control
  *
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit;
+
+require_once plugin_dir_path(__FILE__) . 'update/github-updater.php';
+
+$updater = new GitHub_Updater(__FILE__);
+$updater->set_github_info('adamgreenwell', 'advanced-widget-control');
+
 if ( ! class_exists( 'WP_Advanced_Widget_Control' ) ) :
 
 /**
@@ -47,7 +53,7 @@ final class WP_Advanced_Widget_Control {
 
 			self::$instance->includes();
 			// self::$instance->roles         = new WIDGETCONTROL_Roles();
-			add_filter( 'use_widgets_block_editor', array(self::$instance,'widget_options_use_widgets_block_editor') );
+			add_filter( 'use_widgets_block_editor', array(self::$instance,'widget_control_use_widgets_block_editor') );
 		}
 		return self::$instance;
 	}
@@ -55,9 +61,10 @@ final class WP_Advanced_Widget_Control {
 	/**
 	 * REVERT classic widgets screen
 	 */
-	public function widget_options_use_widgets_block_editor( $use_widgets_block_editor ) {
-		global $widget_options;
-		if(!empty($widget_options['classic_widgets_screen']) && $widget_options['classic_widgets_screen'] == 'activate' ){
+
+	public function widget_control_use_widgets_block_editor( $use_widgets_block_editor ) {
+		global $widget_control;
+		if(!empty($widget_control['classic_widgets_screen']) && $widget_control['classic_widgets_screen'] == 'activate' ){
 			return false;
 		} else {
 			return true;
@@ -107,10 +114,10 @@ final class WP_Advanced_Widget_Control {
 	 * @return void
 	 */
 	private function includes() {
-		global $widget_options, $widgetcontrol_taxonomies, $widgetcontrol_pages, $widgetcontrol_types, $widgetcontrol_categories, $pagenow;
+		global $widget_control, $widgetcontrol_taxonomies, $widgetcontrol_pages, $widgetcontrol_types, $widgetcontrol_categories, $pagenow;
 
 		require_once WIDGETCONTROL_PLUGIN_DIR . 'includes/admin/settings/register-settings.php';
-		$widget_options = widgetcontrol_get_settings();
+		$widget_control = widgetcontrol_get_settings();
 
 		require_once WIDGETCONTROL_PLUGIN_DIR . 'includes/extras.php';
 		require_once WIDGETCONTROL_PLUGIN_DIR . 'includes/scripts.php';
@@ -143,35 +150,35 @@ final class WP_Advanced_Widget_Control {
 				require_once WIDGETCONTROL_PLUGIN_DIR . 'includes/widgets/widgets.php';
 
 				//add visibility tab if activated
-				if( $widget_options['visibility'] == 'activate' ){
+				if( $widget_control['visibility'] == 'activate' ){
 					require_once WIDGETCONTROL_PLUGIN_DIR . 'includes/widgets/option-tabs/visibility.php';
 				}
 				//add devices tab if activated
-				if( $widget_options['devices'] == 'activate' ){
+				if( $widget_control['devices'] == 'activate' ){
 					require_once WIDGETCONTROL_PLUGIN_DIR . 'includes/widgets/option-tabs/devices.php';
 				}
 
 				//add alignment tab if activated
-				if( $widget_options['alignment'] == 'activate' ){
+				if( $widget_control['alignment'] == 'activate' ){
 					require_once WIDGETCONTROL_PLUGIN_DIR . 'includes/widgets/option-tabs/alignment.php';
 				}
 
 				//add alignment tab if activated
-				if( isset( $widget_options['state'] ) && $widget_options['state'] == 'activate' ){
+				if( isset( $widget_control['state'] ) && $widget_control['state'] == 'activate' ){
 					require_once WIDGETCONTROL_PLUGIN_DIR . 'includes/widgets/option-tabs/state.php';
 				}
 
 				require_once WIDGETCONTROL_PLUGIN_DIR . 'includes/widgets/option-tabs/styling.php';
 
 				//add settings tab if activated
-				if( 'activate' == $widget_options['hide_title'] ||
-			        'activate' == $widget_options['classes'] ||
-			        'activate' == $widget_options['logic'] ){
+				if( 'activate' == $widget_control['hide_title'] ||
+			        'activate' == $widget_control['classes'] ||
+			        'activate' == $widget_control['logic'] ){
 					require_once WIDGETCONTROL_PLUGIN_DIR . 'includes/widgets/option-tabs/settings.php';
 				}
 
-				if( ( isset( $widget_options['import_export'] ) && 'activate' == $widget_options['import_export'] ) ||
-					( isset( $widget_options['widget_area'] ) && 'activate' == $widget_options['widget_area'] )
+				if( ( isset( $widget_control['import_export'] ) && 'activate' == $widget_control['import_export'] ) ||
+					( isset( $widget_control['widget_area'] ) && 'activate' == $widget_control['widget_area'] )
 				 ){
 					require_once WIDGETCONTROL_PLUGIN_DIR . 'includes/admin/import-export.php';
 				}
