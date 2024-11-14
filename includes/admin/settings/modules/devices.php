@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * Create Card Module for Devices Visibility Options
  *
  * @since 1.0
- * @global $widget_options
+ * @global $widget_control
  * @return void
  */
  
@@ -23,8 +23,8 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  
 if( !function_exists( 'widgetcontrol_settings_devices' ) ):
 	function widgetcontrol_settings_devices(){
-	    global $widget_options; ?>
-		<li class="widgetcontrol-module-card widgetcontrol-module-card-no-settings no-settings <?php echo ( $widget_options['devices'] == 'activate' ) ? 'widgetcontrol-module-type-enabled' : 'widgetcontrol-module-type-disabled'; ?>" id="widgetcontrol-module-card-devices" data-module-id="devices">
+	    global $widget_control; ?>
+		<li class="widgetcontrol-module-card widgetcontrol-module-card-no-settings no-settings <?php echo ( $widget_control['devices'] == 'activate' ) ? 'widgetcontrol-module-type-enabled' : 'widgetcontrol-module-type-disabled'; ?>" id="widgetcontrol-module-card-devices" data-module-id="devices">
 			<div class="widgetcontrol-module-card-content">
 				<h2><?php _e( 'Devices Restriction', 'advanced-widget-control' );?></h2>
 				<p class="widgetcontrol-module-desc">
@@ -32,7 +32,7 @@ if( !function_exists( 'widgetcontrol_settings_devices' ) ):
 				</p>
 
 				<div class="widgetcontrol-module-actions hide-if-no-js">
-					<?php if( $widget_options['devices'] == 'activate' ){ ?>
+					<?php if( $widget_control['devices'] == 'activate' ){ ?>
 						<button class="button button-secondary widgetcontrol-toggle-settings"><?php _e( 'Learn More', 'advanced-widget-control' );?></button>
 						<button class="button button-secondary widgetcontrol-toggle-activation"><?php _e( 'Disable', 'advanced-widget-control' );?></button>
 					<?php } else { ?>
@@ -43,7 +43,7 @@ if( !function_exists( 'widgetcontrol_settings_devices' ) ):
 				</div>
 			</div>
 
-			<?php widgetcontrol_modal_start( $widget_options['devices'] ); ?>
+			<?php widgetcontrol_modal_start( $widget_control['devices'] ); ?>
 				<span class="dashicons widgetcontrol-dashicons widgetcontrol-no-top dashicons-smartphone"></span>
 				<h3 class="widgetcontrol-modal-header"><?php _e( 'Devices Restriction', 'advanced-widget-control' );?></h3>
 				<p>
@@ -52,7 +52,7 @@ if( !function_exists( 'widgetcontrol_settings_devices' ) ):
 				<p class="widgetcontrol-settings-section">
 					<?php _e( 'No additional settings available.', 'advanced-widget-control' );?>
 				</p>
-			<?php widgetcontrol_modal_end( $widget_options['devices'] ); ?>
+			<?php widgetcontrol_modal_end( $widget_control['devices'] ); ?>
 
 		</li>
 	    <?php

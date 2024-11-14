@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * Create Card Module for User Login State
  *
  * @since 1.0
- * @global $widget_options
+ * @global $widget_control
  * @return void
  */
  
@@ -23,13 +23,13 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 if( !class_exists( 'widgetcontrol_settings_state' ) ){
 	function widgetcontrol_settings_state(){
-	    global $widget_options;
+	    global $widget_control;
 		//avoid issue after update
-        if( !isset( $widget_options['state'] ) ){
-            $widget_options['state'] = '';
+        if( !isset( $widget_control['state'] ) ){
+            $widget_control['state'] = '';
         }
 		?>
-	    <li class="widgetcontrol-module-card widgetcontrol-module-card-no-settings no-settings <?php echo ( $widget_options['state'] == 'activate' ) ? 'widgetcontrol-module-type-enabled' : 'widgetcontrol-module-type-disabled'; ?>" id="widgetcontrol-module-card-state" data-module-id="state">
+	    <li class="widgetcontrol-module-card widgetcontrol-module-card-no-settings no-settings <?php echo ( $widget_control['state'] == 'activate' ) ? 'widgetcontrol-module-type-enabled' : 'widgetcontrol-module-type-disabled'; ?>" id="widgetcontrol-module-card-state" data-module-id="state">
 			<div class="widgetcontrol-module-card-content">
 				<h2><?php _e( 'User Login State', 'advanced-widget-control' );?></h2>
 				<p class="widgetcontrol-module-desc">
@@ -37,7 +37,7 @@ if( !class_exists( 'widgetcontrol_settings_state' ) ){
 				</p>
 
 				<div class="widgetcontrol-module-actions hide-if-no-js">
-	                <?php if( $widget_options['state'] == 'activate' ){ ?>
+	                <?php if( $widget_control['state'] == 'activate' ){ ?>
 						<button class="button button-secondary widgetcontrol-toggle-settings"><?php _e( 'Learn More', 'advanced-widget-control' );?></button>
 						<button class="button button-secondary widgetcontrol-toggle-activation"><?php _e( 'Disable', 'advanced-widget-control' );?></button>
 					<?php } else { ?>
@@ -48,7 +48,7 @@ if( !class_exists( 'widgetcontrol_settings_state' ) ){
 				</div>
 			</div>
 
-			<?php widgetcontrol_modal_start( $widget_options['state'] ); ?>
+			<?php widgetcontrol_modal_start( $widget_control['state'] ); ?>
 				<span class="dashicons widgetcontrol-dashicons widgetcontrol-no-top dashicons-admin-users"></span>
 				<h3 class="widgetcontrol-modal-header"><?php _e( 'Logged-in or Logged-out Users Restriction', 'advanced-widget-control' );?></h3>
 				<p>
@@ -57,7 +57,7 @@ if( !class_exists( 'widgetcontrol_settings_state' ) ){
 				<p class="widgetcontrol-settings-section">
 					<?php _e( 'No additional settings available.', 'advanced-widget-control' );?>
 				</p>
-			<?php widgetcontrol_modal_end( $widget_options['state'] ); ?>
+			<?php widgetcontrol_modal_end( $widget_control['state'] ); ?>
 
 		</li>
 	    <?php

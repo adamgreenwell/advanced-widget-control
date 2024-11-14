@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * Create Card Module for Move Widget Feature
  *
  * @since 1.0
- * @global $widget_options
+ * @global $widget_control
  * @return void
  */
  
@@ -23,14 +23,14 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 if( !function_exists( 'widgetcontrol_settings_move' ) ):
     function widgetcontrol_settings_move(){
-        global $widget_options;
+        global $widget_control;
 
         //avoid issue after update
-        if( !isset( $widget_options['move'] ) ){
-            $widget_options['move'] = '';
+        if( !isset( $widget_control['move'] ) ){
+            $widget_control['move'] = '';
         }
         ?>
-        <li class="widgetcontrol-module-card widgetcontrol-module-card-no-settings no-settings <?php echo ( $widget_options['move'] == 'activate' ) ? 'widgetcontrol-module-type-enabled' : 'widgetcontrol-module-type-disabled'; ?>" id="widgetcontrol-module-card-move" data-module-id="move">
+        <li class="widgetcontrol-module-card widgetcontrol-module-card-no-settings no-settings <?php echo ( $widget_control['move'] == 'activate' ) ? 'widgetcontrol-module-type-enabled' : 'widgetcontrol-module-type-disabled'; ?>" id="widgetcontrol-module-card-move" data-module-id="move">
     		<div class="widgetcontrol-module-card-content">
     			<h2><?php _e( 'Move Widget', 'advanced-widget-control' );?></h2>
     			<p class="widgetcontrol-module-desc">
@@ -38,7 +38,7 @@ if( !function_exists( 'widgetcontrol_settings_move' ) ):
     			</p>
 
     			<div class="widgetcontrol-module-actions hide-if-no-js">
-                    <?php if( $widget_options['move'] == 'activate' ){ ?>
+                    <?php if( $widget_control['move'] == 'activate' ){ ?>
     					<button class="button button-secondary widgetcontrol-toggle-settings"><?php _e( 'Learn More', 'advanced-widget-control' );?></button>
     					<button class="button button-secondary widgetcontrol-toggle-activation"><?php _e( 'Disable', 'advanced-widget-control' );?></button>
     				<?php } else { ?>
@@ -50,7 +50,7 @@ if( !function_exists( 'widgetcontrol_settings_move' ) ):
 
     		</div>
 
-    		<?php widgetcontrol_modal_start( $widget_options['move'] ); ?>
+    		<?php widgetcontrol_modal_start( $widget_control['move'] ); ?>
     			<span class="dashicons widgetcontrol-dashicons widgetcontrol-no-top dashicons-image-rotate-right"></span>
     			<h3 class="widgetcontrol-modal-header"><?php _e( 'Move Widget', 'advanced-widget-control' );?></h3>
     			<p>
@@ -59,7 +59,7 @@ if( !function_exists( 'widgetcontrol_settings_move' ) ):
     			<p class="widgetcontrol-settings-section">
     				<?php _e( 'No additional settings available.', 'advanced-widget-control' );?>
     			</p>
-    		<?php widgetcontrol_modal_end( $widget_options['move'] ); ?>
+    		<?php widgetcontrol_modal_end( $widget_control['move'] ); ?>
 
     	</li>
         <?php

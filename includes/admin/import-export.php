@@ -19,16 +19,16 @@ class WP_Advanced_Widget_Control_Importer {
 	protected $imported = array();
 
     function __construct(){
-    	global $widget_options;
-    	if( ( isset( $widget_options['import_export'] ) && 'activate' == $widget_options['import_export'] ) ||
-    		( isset( $widget_options['widget_area'] ) && 'activate' == $widget_options['widget_area'] )
+    	global $widget_control;
+    	if( ( isset( $widget_control['import_export'] ) && 'activate' == $widget_control['import_export'] ) ||
+    		( isset( $widget_control['widget_area'] ) && 'activate' == $widget_control['widget_area'] )
     	 ){
     		add_action( 'admin_menu', array( &$this, 'options_page' ), 10 );
 	        add_action( 'wp_ajax_widgetcontrol_migrator', array( &$this, 'ajax_migration' ) );
 	        add_action( 'load-tools_page_widgetcontrol_migrator_settings', array( &$this, 'export_json_file' ) );
 	        add_action( 'load-tools_page_widgetcontrol_migrator_settings', array( &$this, 'import_json_file' ) );
 
-	        if( !isset( $widget_options['import_export'] ) || ( isset( $widget_options['import_export'] ) && 'activate' != $widget_options['import_export']  ) ){
+	        if( !isset( $widget_control['import_export'] ) || ( isset( $widget_control['import_export'] ) && 'activate' != $widget_control['import_export']  ) ){
 	        	add_action( 'admin_footer', array( &$this, 'admin_footer' ), 10 );
 	        }
 	        
@@ -541,9 +541,9 @@ class WP_Advanced_Widget_Control_Importer {
 					}
 
 					// Change widget options key to the given id_base and number to work perfectly
-					if( isset( $get_widget_instances[ $new_instance_number ] ) && isset( $get_widget_instances[ $new_instance_number ]['extended_widget_opts'] ) ){
-						$get_widget_instances[ $new_instance_number ]['extended_widget_opts-' . $id_base . '-' . $new_instance_number] = $get_widget_instances[ $new_instance_number ]['extended_widget_opts'];
-						unset( $get_widget_instances[ $new_instance_number ]['extended_widget_opts'] );
+					if( isset( $get_widget_instances[ $new_instance_number ] ) && isset( $get_widget_instances[ $new_instance_number ]['advanced_widget_control'] ) ){
+						$get_widget_instances[ $new_instance_number ]['advanced_widget_control-' . $id_base . '-' . $new_instance_number] = $get_widget_instances[ $new_instance_number ]['advanced_widget_control'];
+						unset( $get_widget_instances[ $new_instance_number ]['advanced_widget_control'] );
 					}
 
 					// Move _multiwidget to the end
@@ -627,7 +627,7 @@ class WP_Advanced_Widget_Control_Importer {
 			   	continue;
 		   	}
 		   	$checked[ $widget_id ] = '1';
-		   	$k = 'extended_widget_opts-'. $widget_id;
+		   	$k = 'advanced_widget_control-'. $widget_id;
 			if( isset( $instance[ $number ][ $k ] ) ){
 
 				//unset id_base
@@ -635,7 +635,7 @@ class WP_Advanced_Widget_Control_Importer {
 					unset( $instance[ $number ][ $k ]['id_base']  );
 				}
 
-				$instance[ $number ]['extended_widget_opts'] = $instance[ $number ][ $k ];
+				$instance[ $number ]['advanced_widget_control'] = $instance[ $number ][ $k ];
 				unset( $instance[ $number ][ $k ] );
 			}
 			$widget_instances[ $widget_id ] = $instance[ $number ];

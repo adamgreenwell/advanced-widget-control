@@ -2,33 +2,33 @@ $desktop : 769px;
 $tablet : 768px;
 $mobile : 736px;
 body{
-	.extendedwopts-show{
+	.advancedwidgetctrl-show{
 		display: none;
 	}
-	.widgetcontrol-hide_title{
+	.advancedwidgetctrl-hide_title{
 		.widget-title{
 			display: none;
 		}
 	}
 
 	//alignment
-	.extendedwopts-md-right{
+	.advancedwidgetctrl-md-right{
 		text-align: right;
 	}
-	.extendedwopts-md-left{
+	.advancedwidgetctrl-md-left{
 		text-align: left;
 	}
-	.extendedwopts-md-center{
+	.advancedwidgetctrl-md-center{
 		text-align: center;
 	}
-	.extendedwopts-md-justify{
+	.advancedwidgetctrl-md-justify{
 		text-align: justify;
 	}
 	@media screen and (min-width: $desktop) {
-		.extendedwopts-hide.extendedwopts-desktop{
+		.advancedwidgetctrl-hide.advancedwidgetctrl-desktop{
 			display: none !important;
 		}
-		.extendedwopts-show.extendedwopts-desktop{
+		.advancedwidgetctrl-show.advancedwidgetctrl-desktop{
 			display: block;
 		}
 		.widget.clearfix-desktop{
@@ -37,10 +37,10 @@ body{
 	}
 	@media screen and (max-width: $tablet)
 	and (min-width: $mobile + 1) {
-		.extendedwopts-hide.extendedwopts-tablet{
+		.advancedwidgetctrl-hide.advancedwidgetctrl-tablet{
 			display: none !important;
 		}
-		.extendedwopts-show.extendedwopts-tablet{
+		.advancedwidgetctrl-show.advancedwidgetctrl-tablet{
 			display: block;
 		}
 		.widget.clearfix-desktop{
@@ -51,10 +51,10 @@ body{
 		}
 	}
 	@media screen and (max-width: $mobile) {
-		.extendedwopts-hide.extendedwopts-mobile{
+		.advancedwidgetctrl-hide.advancedwidgetctrl-mobile{
 			display: none !important;
 		}
-		.extendedwopts-show.extendedwopts-mobile{
+		.advancedwidgetctrl-show.advancedwidgetctrl-mobile{
 			display: block;
 		}
 		.widget.clearfix-desktop, .widget.clearfix-tablet{

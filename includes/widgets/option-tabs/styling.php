@@ -16,23 +16,23 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  */
 
  /**
- * Called on 'extended_widget_opts_tabs'
+ * Called on 'advanced_widget_control_tabs'
  * create new tab navigation for alignment options
  */
 function widgetcontrol_tab_styling( $args ){ ?>
-    <li class="extended-widget-opts-tab-styling">
-        <a href="#extended-widget-opts-tab-<?php echo $args['id'];?>-styling" title="<?php _e( 'Styling', 'advanced-widget-control' );?>" ><span class="dashicons dashicons-art"></span> <span class="tabtitle"><?php _e( 'Styling', 'advanced-widget-control' );?></span></a>
+    <li class="advanced-widget-control-tab-styling">
+        <a href="#advanced-widget-control-tab-<?php echo $args['id'];?>-styling" title="<?php _e( 'Styling', 'advanced-widget-control' );?>" ><span class="dashicons dashicons-art"></span> <span class="tabtitle"><?php _e( 'Styling', 'advanced-widget-control' );?></span></a>
     </li>
 <?php
 }
-add_action( 'extended_widget_opts_tabs', 'widgetcontrol_tab_styling' );
+add_action( 'advanced_widget_control_tabs', 'widgetcontrol_tab_styling' );
 
 /**
- * Called on 'extended_widget_opts_tabcontent'
+ * Called on 'advanced_widget_control_tabcontent'
  * create new tab content options for alignment options
  */
 function widgetcontrol_tabcontent_styling( $args ){
-    global $widget_options;
+    global $widget_control;
 
     $selected               = 0;
     $bg_image               = '';
@@ -63,4 +63,4 @@ function widgetcontrol_tabcontent_styling( $args ){
     $table_border_color     = '';
 
 }
-add_action( 'extended_widget_opts_tabcontent', 'widgetcontrol_tabcontent_styling'); ?>
+add_action( 'advanced_widget_control_tabcontent', 'widgetcontrol_tabcontent_styling'); ?>

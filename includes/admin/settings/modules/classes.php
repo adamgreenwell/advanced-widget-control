@@ -13,16 +13,16 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * Create Card Module for Widget Classes Options
  *
  * @since 1.0
- * @global $widget_options
+ * @global $widget_control
  * @return void
  *
  */
 if( !function_exists( 'widgetcontrol_settings_classes' ) ):
 	function widgetcontrol_settings_classes(){
-		global $widget_options;
-		$classes	= ( isset( $widget_options['settings']['classes'] ) ) ? $widget_options['settings']['classes'] : array();
+		global $widget_control;
+		$classes	= ( isset( $widget_control['settings']['classes'] ) ) ? $widget_control['settings']['classes'] : array();
 		$classlists = ( isset( $classes['classlists'] ) && is_array( $classes['classlists'] ) ) ? $classes['classlists'] : array();?>
-	    <li class="widgetcontrol-module-card <?php echo ( $widget_options['classes'] == 'activate' ) ? 'widgetcontrol-module-type-enabled' : 'widgetcontrol-module-type-disabled'; ?>" id="widgetcontrol-module-card-classes" data-module-id="classes">
+	    <li class="widgetcontrol-module-card <?php echo ( $widget_control['classes'] == 'activate' ) ? 'widgetcontrol-module-type-enabled' : 'widgetcontrol-module-type-disabled'; ?>" id="widgetcontrol-module-card-classes" data-module-id="classes">
 			<div class="widgetcontrol-module-card-content">
 				<h2><?php _e( 'Classes & ID', 'advanced-widget-control' );?></h2>
 				<p class="widgetcontrol-module-desc">
@@ -30,7 +30,7 @@ if( !function_exists( 'widgetcontrol_settings_classes' ) ):
 				</p>
 
 				<div class="widgetcontrol-module-actions hide-if-no-js">
-	                <?php if( $widget_options['classes'] == 'activate' ){ ?>
+	                <?php if( $widget_control['classes'] == 'activate' ){ ?>
 						<button class="button button-secondary widgetcontrol-toggle-settings"><?php _e( 'Configure Settings', 'advanced-widget-control' );?></button>
 						<button class="button button-secondary widgetcontrol-toggle-activation"><?php _e( 'Disable', 'advanced-widget-control' );?></button>
 					<?php } else { ?>
@@ -42,7 +42,7 @@ if( !function_exists( 'widgetcontrol_settings_classes' ) ):
 
 			</div>
 
-			<?php widgetcontrol_modal_start( $widget_options['classes'] ); ?>
+			<?php widgetcontrol_modal_start( $widget_control['classes'] ); ?>
 				<span class="dashicons widgetcontrol-dashicons widgetcontrol-no-top dashicons-admin-generic"></span>
 				<h3 class="widgetcontrol-modal-header"><?php _e( 'Classes & ID', 'advanced-widget-control' );?></h3>
 				<p>
@@ -129,7 +129,7 @@ if( !function_exists( 'widgetcontrol_settings_classes' ) ):
 						</tbody>
 					</table>
 				</div>
-			<?php widgetcontrol_modal_end( $widget_options['classes'] ); ?>
+			<?php widgetcontrol_modal_end( $widget_control['classes'] ); ?>
 
 		</li>
 	    <?php

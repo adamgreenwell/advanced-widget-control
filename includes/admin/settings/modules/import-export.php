@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * Create Card Module for Import & Export
  *
  * @since 1.0
- * @global $widget_options
+ * @global $widget_control
  * @return void
  */
  
@@ -22,13 +22,13 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  */
 
 function widgetcontrol_settings_import_export(){
-    global $widget_options; 
+    global $widget_control; 
     //avoid issue after update
-    if( !isset( $widget_options['import_export'] ) ){
-        $widget_options['import_export'] = '';
+    if( !isset( $widget_control['import_export'] ) ){
+        $widget_control['import_export'] = '';
     }
     ?>
-    <li class="widgetcontrol-module-card widgetcontrol-module-card-no-settings no-settings <?php echo ( $widget_options['import_export'] == 'activate' ) ? 'widgetcontrol-module-type-enabled' : 'widgetcontrol-module-type-disabled'; ?>" id="widgetcontrol-module-card-import_export" data-module-id="import_export">
+    <li class="widgetcontrol-module-card widgetcontrol-module-card-no-settings no-settings <?php echo ( $widget_control['import_export'] == 'activate' ) ? 'widgetcontrol-module-type-enabled' : 'widgetcontrol-module-type-disabled'; ?>" id="widgetcontrol-module-card-import_export" data-module-id="import_export">
 		<div class="widgetcontrol-module-card-content">
 			<h2><?php _e( 'Import & Export Widgets', 'advanced-widget-control' );?></h2>
 			<p class="widgetcontrol-module-desc">
@@ -36,7 +36,7 @@ function widgetcontrol_settings_import_export(){
 			</p>
 
 			<div class="widgetcontrol-module-actions hide-if-no-js">
-                <?php if( $widget_options['import_export'] == 'activate' ){ ?>
+                <?php if( $widget_control['import_export'] == 'activate' ){ ?>
 					<button class="button button-secondary widgetcontrol-toggle-settings"><?php _e( 'Learn More', 'advanced-widget-control' );?></button>
 					<button class="button button-secondary widgetcontrol-toggle-activation"><?php _e( 'Disable', 'advanced-widget-control' );?></button>
 				<?php } else { ?>
@@ -48,7 +48,7 @@ function widgetcontrol_settings_import_export(){
 
 		</div>
 
-		<?php widgetcontrol_modal_start( $widget_options['import_export'] ); ?>
+		<?php widgetcontrol_modal_start( $widget_control['import_export'] ); ?>
 			<span class="dashicons widgetcontrol-dashicons widgetcontrol-no-top dashicons-download"></span>
 			<h3 class="widgetcontrol-modal-header"><?php _e( 'Import & Export Widgets', 'advanced-widget-control' );?></h3>
 			<p>
@@ -57,7 +57,7 @@ function widgetcontrol_settings_import_export(){
 			<p class="widgetcontrol-settings-section">
 				<?php _e( 'No additional settings available.', 'advanced-widget-control' );?>
 			</p>
-		<?php widgetcontrol_modal_end( $widget_options['import_export'] ); ?>
+		<?php widgetcontrol_modal_end( $widget_control['import_export'] ); ?>
 
 	</li>
     <?php

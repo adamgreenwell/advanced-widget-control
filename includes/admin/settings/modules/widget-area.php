@@ -13,19 +13,19 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * Create Card Module for Widget Area Options
  *
  * @since 1.0
- * @global $widget_options
+ * @global $widget_control
  * @return void
  */
 if( !function_exists( 'widgetcontrol_settings_widget_area' ) ):
 	function widgetcontrol_settings_widget_area(){
-	    global $widget_options;
+	    global $widget_control;
 	    //avoid issue after update
-	    if( !isset( $widget_options['widget_area'] ) ){
-	        $widget_options['widget_area'] = '';
+	    if( !isset( $widget_control['widget_area'] ) ){
+	        $widget_control['widget_area'] = '';
 	    }
 
-		$widget_area = ( isset( $widget_options['settings']['widget_area'] ) ) ? $widget_options['settings']['widget_area'] : array();?>
-	    <li class="widgetcontrol-module-card <?php echo ( $widget_options['widget_area'] == 'activate' ) ? 'widgetcontrol-module-type-enabled' : 'widgetcontrol-module-type-disabled'; ?>" id="widgetcontrol-module-card-widget_area" data-module-id="widget_area">
+		$widget_area = ( isset( $widget_control['settings']['widget_area'] ) ) ? $widget_control['settings']['widget_area'] : array();?>
+	    <li class="widgetcontrol-module-card <?php echo ( $widget_control['widget_area'] == 'activate' ) ? 'widgetcontrol-module-type-enabled' : 'widgetcontrol-module-type-disabled'; ?>" id="widgetcontrol-module-card-widget_area" data-module-id="widget_area">
 			<div class="widgetcontrol-module-card-content">
 				<h2><?php _e( 'Widget Area Options', 'advanced-widget-control' );?></h2>
 				<p class="widgetcontrol-module-desc">
@@ -33,7 +33,7 @@ if( !function_exists( 'widgetcontrol_settings_widget_area' ) ):
 				</p>
 
 				<div class="widgetcontrol-module-actions hide-if-no-js">
-					<?php if( $widget_options['widget_area'] == 'activate' ){ ?>
+					<?php if( $widget_control['widget_area'] == 'activate' ){ ?>
 						<button class="button button-secondary widgetcontrol-toggle-settings"><?php _e( 'Configure Settings', 'advanced-widget-control' );?></button>
 						<button class="button button-secondary widgetcontrol-toggle-activation"><?php _e( 'Disable', 'advanced-widget-control' );?></button>
 					<?php } else { ?>
@@ -44,7 +44,7 @@ if( !function_exists( 'widgetcontrol_settings_widget_area' ) ):
 				</div>
 			</div>
 
-			<?php widgetcontrol_modal_start( $widget_options['widget_area'] ); ?>
+			<?php widgetcontrol_modal_start( $widget_control['widget_area'] ); ?>
 				<span class="dashicons widgetcontrol-dashicons widgetcontrol-no-top dashicons-art"></span>
 				<h3 class="widgetcontrol-modal-header"><?php _e( 'Widget Area Options', 'advanced-widget-control' );?></h3>
 				<p>
@@ -77,7 +77,7 @@ if( !function_exists( 'widgetcontrol_settings_widget_area' ) ):
 						</td>
 					</tr>
 				</table>
-			<?php widgetcontrol_modal_end( $widget_options['widget_area'] ); ?>
+			<?php widgetcontrol_modal_end( $widget_control['widget_area'] ); ?>
 
 		</li>
 	    <?php

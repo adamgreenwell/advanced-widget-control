@@ -1,9 +1,8 @@
 <?php
 /**
  * Extra Functions
- *
  * Collections of extra functions to avoid repetition
- *
+ * File: includes/extras.php
  */
 
 function widgetcontrol_sanitize_array( &$array ) {
@@ -170,7 +169,7 @@ if( !class_exists( 'WidgetOpts_Pages_Checkboxes' ) ):
 
             $output .= '<p>' . $indent;
 
-            $output .= '<input type="checkbox" name="'. $args['namespace'] .'[extended_widget_opts][visibility][pages]['. $page->ID .']" id="'. $args['id'] .'-opts-pages-'. $page->ID .'" value="1" '. $checked .'/>';
+            $output .= '<input type="checkbox" name="'. $args['namespace'] .'[advanced_widget_control][visibility][pages]['. $page->ID .']" id="'. $args['id'] .'-opts-pages-'. $page->ID .'" value="1" '. $checked .'/>';
 
             $output .= '<label for="'. $args['id'] .'-opts-pages-'. $page->ID .'">'. $page->post_title .'</label>';
         }

@@ -29,10 +29,10 @@ if( !function_exists( 'widgetcontrol_classes_generator' ) ){
                 //devices visibility
                 if( !empty( $devices ) ){
                     $device_opts    = ( isset( $opts['devices']['options'] ) ) ? $opts['devices']['options'] : 'hide';
-                    $classes[] = 'extendedwopts-' . $device_opts ;
+                    $classes[] = 'advancedwidgetctrl-' . $device_opts ;
 
                     foreach ($devices as $key => $value) {
-                        $classes[] = 'extendedwopts-' . $key;
+                        $classes[] = 'advancedwidgetctrl-' . $key;
                     }
                 }
             }
@@ -42,7 +42,7 @@ if( !function_exists( 'widgetcontrol_classes_generator' ) ){
                 if( !empty( $alignment ) ){
                     foreach ($alignment as $k => $v) {
                         if( 'default' != $v ){
-                            $classes[] = 'extendedwopts-' . $abbr[ $k ] . '-'. $v ;
+                            $classes[] = 'advancedwidgetctrl-' . $abbr[ $k ] . '-'. $v ;
                         }
                     }
                 }

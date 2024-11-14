@@ -1,9 +1,10 @@
 <?php
+
 /**
- * Install Function
- *
- * @since       1.0
-*/
+* Install Function
+* File: includes/install.php
+**/
+
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 

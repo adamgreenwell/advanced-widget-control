@@ -1,8 +1,7 @@
 <?php
 /**
  * Scripts
- *
- * @since       1.0
+ * File: includes/scripts.php
  */
 
 // Exit if accessed directly
@@ -30,13 +29,13 @@ add_action( 'customize_controls_enqueue_scripts', 'widgetcontrol_load_scripts' )
  * Enqueues the required admin scripts.
  *
  * @since 1.0
- * @global $widget_options
+ * @global $widget_control
  * @param string $hook Page hook
  * @return void
  */
 if( !function_exists( 'widgetcontrol_load_admin_scripts' ) ):
       function widgetcontrol_load_admin_scripts( $hook ) {
-            global $widget_options;
+            global $widget_control;
 
             $js_dir  = WIDGETCONTROL_PLUGIN_URL . 'assets/js/';
       		$css_dir = WIDGETCONTROL_PLUGIN_URL . 'assets/css/';
@@ -87,25 +86,25 @@ if( !function_exists( 'widgetcontrol_load_admin_scripts' ) ):
               </div>';
 
             $btn_controls = '';
-            if( isset( $widget_options['move'] ) && 'activate' == $widget_options['move'] ){
+            if( isset( $widget_control['move'] ) && 'activate' == $widget_control['move'] ){
               $btn_controls .= ' | <button type="button" class="button-link widgetcontrol-control" data-action="move">'. __( 'Move', 'advanced-widget-control' ) .'</button>';
             }
 
             $sidebaropts = '';
-            if( isset( $widget_options['widget_area'] ) && 'activate' == $widget_options['widget_area'] ){
+            if( isset( $widget_control['widget_area'] ) && 'activate' == $widget_control['widget_area'] ){
                 /* Updated by Haive Vistal - 04/20/2023 - Make sure no empty space in under the widgets if no activated links */
                 $remove_widget_link = 0;
                 $download_backup_link = 0;
                 $delete_all_widget_link = 0;
 
-                if( isset( $widget_options['settings']['widget_area'] ) && isset( $widget_options['settings']['widget_area']['remove'] ) && '1' == $widget_options['settings']['widget_area']['remove'] ){
+                if( isset( $widget_control['settings']['widget_area'] ) && isset( $widget_control['settings']['widget_area']['remove'] ) && '1' == $widget_control['settings']['widget_area']['remove'] ){
                     $remove_widget_link = 1;
                 }
-                if( isset( $widget_options['settings']['widget_area'] ) && isset( $widget_options['settings']['widget_area']['backup'] ) && '1' == $widget_options['settings']['widget_area']['backup'] ){
+                if( isset( $widget_control['settings']['widget_area'] ) && isset( $widget_control['settings']['widget_area']['backup'] ) && '1' == $widget_control['settings']['widget_area']['backup'] ){
                     $download_backup_link = 1;
                   }
 
-                if( isset( $widget_options['settings']['widget_area'] ) && isset( $widget_options['settings']['widget_area']['remove'] ) && '1' == $widget_options['settings']['widget_area']['remove'] ){
+                if( isset( $widget_control['settings']['widget_area'] ) && isset( $widget_control['settings']['widget_area']['remove'] ) && '1' == $widget_control['settings']['widget_area']['remove'] ){
                     $delete_all_widget_link = 1;
                 }
 
@@ -177,9 +176,9 @@ endif;
 
 if( !function_exists( 'widgetcontrol_widgets_footer' ) ){
       function widgetcontrol_widgets_footer(){
-            global $widget_options;?>
+            global $widget_control;?>
             <div class="widgetsopts-chooser" style="display:none;">
-                  <?php if( isset( $widget_options['search'] ) && 'activate' == $widget_options['search'] ): ?>
+                  <?php if( isset( $widget_control['search'] ) && 'activate' == $widget_control['search'] ): ?>
                         <div id="widgetcontrol-widgets-chooser">
                               <label class="screen-reader-text" for="widgetcontrol-search-chooser"><?php _e( 'Search Sidebar', 'advanced-widget-control' );?></label>
                               <input type="text" id="widgetsopts-widgets-search" class="widgetcontrol-widgets-search widgetsopts-widgets-search" placeholder="Search sidebar…">

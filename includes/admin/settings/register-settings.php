@@ -13,14 +13,14 @@ if ( !defined( 'ABSPATH' ) ) exit;
  * Looks to see if the specified setting exists, returns default if not
  *
  * @since 1.0
- * @global $widget_options Array of all the Advanced Widget Control
+ * @global $widget_control Array of all the Advanced Widget Control
  * @return mixed
  */
 if( !function_exists( 'widgetcontrol_get_option' ) ):
 	function widgetcontrol_get_option( $key = '', $default = false ) {
-		global $widget_options;
+		global $widget_control;
 
-		$value = ! empty( $widget_options[ $key ] ) ? $widget_options[ $key ] : $default;
+		$value = ! empty( $widget_control[ $key ] ) ? $widget_control[ $key ] : $default;
 		$value = apply_filters( 'widgetcontrol_get_option', $value, $key, $default );
 
 		return apply_filters( 'widgetcontrol_get_option_' . $key, $value, $key, $default );
@@ -32,12 +32,12 @@ endif;
  *
  * Updates a widgetcontrol setting value in both the db and the global variable.
  * Warning: Passing in an empty, false or null string value will remove
- *          the key from the widget_options array.
+ *          the key from the widget_control array.
  *
  * @since 1.0
  * @param string $key The Key to update
  * @param string|bool|int $value The value to set the key to
- * @global $widget_options Array of all the Advanced Widget Control
+ * @global $widget_control Array of all the Advanced Widget Control
  * @return boolean True if updated, false if not.
  */
 if( !function_exists( 'widgetcontrol_update_option' ) ):
@@ -65,8 +65,8 @@ if( !function_exists( 'widgetcontrol_update_option' ) ):
 		$did_update = update_option( 'widgetcontrol_settings', $options );
 		// If it updated, let's update the global variable
 		if ( $did_update ){
-			global $widget_options;
-			$widget_options[ $key ] = $value;
+			global $widget_control;
+			$widget_control[ $key ] = $value;
 		}
 		return $did_update;
 	}
@@ -79,7 +79,7 @@ endif;
  *
  * @since 1.0
  * @param string $key The Key to delete
- * @global $widget_options Array of all the Advanced Widget Control
+ * @global $widget_control Array of all the Advanced Widget Control
  * @return boolean True if removed, false if not.
  */
 if( !function_exists( 'widgetcontrol_delete_option' ) ):

@@ -17,25 +17,25 @@ if (!defined('ABSPATH')) exit;
  */
 
 /**
- * Called on 'extended_widget_opts_tabs'
+ * Called on 'advanced_widget_control_tabs'
  * create new tab navigation for visibility options
  */
 function widgetcontrol_tab_visibility($args)
 { ?>
-    <li class="extended-widget-opts-tab-visibility">
-        <a href="#extended-widget-opts-tab-<?php echo $args['id']; ?>-visibility" title="<?php _e('Visibility', 'advanced-widget-control'); ?>"><span class="dashicons dashicons-visibility"></span> <span class="tabtitle"><?php _e('Visibility', 'advanced-widget-control'); ?></span></a>
+    <li class="advanced-widget-control-tab-visibility">
+        <a href="#advanced-widget-control-tab-<?php echo $args['id']; ?>-visibility" title="<?php _e('Visibility', 'advanced-widget-control'); ?>"><span class="dashicons dashicons-visibility"></span> <span class="tabtitle"><?php _e('Visibility', 'advanced-widget-control'); ?></span></a>
     </li>
 <?php
 }
-add_action('extended_widget_opts_tabs', 'widgetcontrol_tab_visibility');
+add_action('advanced_widget_control_tabs', 'widgetcontrol_tab_visibility');
 
 /**
- * Called on 'extended_widget_opts_tabcontent'
+ * Called on 'advanced_widget_control_tabcontent'
  * create new tab content options for visibility options
  */
 function widgetcontrol_tabcontent_visibility($args)
 {
-    global $widget_options, $widgetcontrol_taxonomies, $widgetcontrol_pages, $widgetcontrol_types, $widgetcontrol_categories;
+    global $widget_control, $widgetcontrol_taxonomies, $widgetcontrol_pages, $widgetcontrol_types, $widgetcontrol_categories;
 
     $checked    = "";
     $main       = "";
@@ -63,8 +63,8 @@ function widgetcontrol_tabcontent_visibility($args)
 
     //pro version only
     // $get_terms = array();
-    // if( !empty( $widget_options['settings']['taxonomies'] ) && is_array( $widget_options['settings']['taxonomies'] ) ){
-    //     foreach ( $widget_options['settings']['taxonomies'] as $tax_opt => $vall ) {
+    // if( !empty( $widget_control['settings']['taxonomies'] ) && is_array( $widget_control['settings']['taxonomies'] ) ){
+    //     foreach ( $widget_control['settings']['taxonomies'] as $tax_opt => $vall ) {
     //         $tax_name = 'widgetcontrol_taxonomy_'. $tax_opt;
     //         global $$tax_name;
     //         $get_terms[ $tax_opt ] = $$tax_name;
@@ -154,15 +154,15 @@ function widgetcontrol_tabcontent_visibility($args)
     }
     $term_values = $tmpTerms_values;
 ?>
-    <div id="extended-widget-opts-tab-<?php echo $args['id']; ?>-visibility" class="extended-widget-opts-tabcontent extended-widget-opts-tabcontent-visibility">
+    <div id="advanced-widget-control-tab-<?php echo $args['id']; ?>-visibility" class="advanced-widget-control-tabcontent advanced-widget-control-tabcontent-visibility">
 
-        <div class="extended-widget-opts-styling-tabs extended-widget-opts-inside-tabs">
-            <input type="hidden" id="extended-widget-opts-visibility-m-selectedtab" value="<?php echo $main; ?>" name="<?php echo $args['namespace']; ?>[extended_widget_opts][visibility][main]" />
+        <div class="advanced-widget-control-styling-tabs advanced-widget-control-inside-tabs">
+            <input type="hidden" id="advanced-widget-control-visibility-m-selectedtab" value="<?php echo $main; ?>" name="<?php echo $args['namespace']; ?>[advanced_widget_control][visibility][main]" />
 
             <p class="widgetcontrol-subtitle"><?php _e('WordPress Pages', 'advanced-widget-control'); ?></p>
-            <div id="extended-widget-opts-visibility-tab-<?php echo $args['id']; ?>-main" class="extended-widget-opts-visibility-tabcontent extended-widget-opts-inside-tabcontent extended-widget-opts-inner-tabcontent">
+            <div id="advanced-widget-control-visibility-tab-<?php echo $args['id']; ?>-main" class="advanced-widget-control-visibility-tabcontent advanced-widget-control-inside-tabcontent advanced-widget-control-inner-tabcontent">
                 <p><strong><?php _e('Hide or Show', 'advanced-widget-control'); ?></strong>
-                    <select class="widefat" name="<?php echo $args['namespace']; ?>[extended_widget_opts][visibility][options]">
+                    <select class="widefat" name="<?php echo $args['namespace']; ?>[advanced_widget_control][visibility][options]">
                         <option value="hide" <?php if ($options_values == 'hide') {
                                                     echo 'selected="selected"';
                                                 } ?>><?php _e('Hide on checked pages', 'advanced-widget-control'); ?></option>
@@ -172,51 +172,51 @@ function widgetcontrol_tabcontent_visibility($args)
                     </select>
                 </p>
 
-                <div class="extended-widget-opts-visibility-tabs extended-widget-opts-inside-tabs">
-                    <input type="hidden" id="extended-widget-opts-visibility-selectedtab" value="<?php echo $selected; ?>" name="<?php echo $args['namespace']; ?>[extended_widget_opts][visibility][selected]" />
+                <div class="advanced-widget-control-visibility-tabs advanced-widget-control-inside-tabs">
+                    <input type="hidden" id="advanced-widget-control-visibility-selectedtab" value="<?php echo $selected; ?>" name="<?php echo $args['namespace']; ?>[advanced_widget_control][visibility][selected]" />
                     <!--  start tab nav -->
-                    <ul class="extended-widget-opts-visibility-tabnav-ul">
+                    <ul class="advanced-widget-control-visibility-tabnav-ul">
                         <?php if (
-                            isset($widget_options['settings']['visibility']) &&
-                            isset($widget_options['settings']['visibility']['misc']) &&
-                            '1' == $widget_options['settings']['visibility']['misc']
+                            isset($widget_control['settings']['visibility']) &&
+                            isset($widget_control['settings']['visibility']['misc']) &&
+                            '1' == $widget_control['settings']['visibility']['misc']
                         ) { ?>
-                            <li class="extended-widget-opts-visibility-tab-visibility">
-                                <a href="#extended-widget-opts-visibility-tab-<?php echo $args['id']; ?>-misc" title="<?php _e('Home, Blog, Search, etc..', 'advanced-widget-control'); ?>"><?php _e('Misc', 'advanced-widget-control'); ?></a>
+                            <li class="advanced-widget-control-visibility-tab-visibility">
+                                <a href="#advanced-widget-control-visibility-tab-<?php echo $args['id']; ?>-misc" title="<?php _e('Home, Blog, Search, etc..', 'advanced-widget-control'); ?>"><?php _e('Misc', 'advanced-widget-control'); ?></a>
                             </li>
                         <?php } ?>
 
                         <?php if (
-                            isset($widget_options['settings']['visibility']) &&
-                            isset($widget_options['settings']['visibility']['post_type']) &&
-                            '1' == $widget_options['settings']['visibility']['post_type']
+                            isset($widget_control['settings']['visibility']) &&
+                            isset($widget_control['settings']['visibility']['post_type']) &&
+                            '1' == $widget_control['settings']['visibility']['post_type']
                         ) { ?>
-                            <li class="extended-widget-opts-visibility-tab-visibility">
-                                <a href="#extended-widget-opts-visibility-tab-<?php echo $args['id']; ?>-types" title="<?php _e('Pages & Custom Post Types', 'advanced-widget-control'); ?>"><?php _e('Post Types', 'advanced-widget-control'); ?></a>
+                            <li class="advanced-widget-control-visibility-tab-visibility">
+                                <a href="#advanced-widget-control-visibility-tab-<?php echo $args['id']; ?>-types" title="<?php _e('Pages & Custom Post Types', 'advanced-widget-control'); ?>"><?php _e('Post Types', 'advanced-widget-control'); ?></a>
                             </li>
                         <?php } ?>
 
                         <?php if (
-                            isset($widget_options['settings']['visibility']) &&
-                            isset($widget_options['settings']['visibility']['taxonomies']) &&
-                            '1' == $widget_options['settings']['visibility']['taxonomies']
+                            isset($widget_control['settings']['visibility']) &&
+                            isset($widget_control['settings']['visibility']['taxonomies']) &&
+                            '1' == $widget_control['settings']['visibility']['taxonomies']
                         ) { ?>
-                            <li class="extended-widget-opts-visibility-tab-visibility">
-                                <a href="#extended-widget-opts-visibility-tab-<?php echo $args['id']; ?>-tax" title="<?php _e('Categories, Tags & Taxonomies', 'advanced-widget-control'); ?>"><?php _e('Taxonomies', 'advanced-widget-control'); ?></a>
+                            <li class="advanced-widget-control-visibility-tab-visibility">
+                                <a href="#advanced-widget-control-visibility-tab-<?php echo $args['id']; ?>-tax" title="<?php _e('Categories, Tags & Taxonomies', 'advanced-widget-control'); ?>"><?php _e('Taxonomies', 'advanced-widget-control'); ?></a>
                             </li>
                         <?php } ?>
-                        <div class="extended-widget-opts-clearfix"></div>
+                        <div class="advanced-widget-control-clearfix"></div>
                     </ul><!--  end tab nav -->
-                    <div class="extended-widget-opts-clearfix"></div>
+                    <div class="advanced-widget-control-clearfix"></div>
 
                     <?php if (
-                        isset($widget_options['settings']['visibility']) &&
-                        isset($widget_options['settings']['visibility']['misc']) &&
-                        '1' == $widget_options['settings']['visibility']['misc']
+                        isset($widget_control['settings']['visibility']) &&
+                        isset($widget_control['settings']['visibility']['misc']) &&
+                        '1' == $widget_control['settings']['visibility']['misc']
                     ) { ?>
                         <!--  start misc tab content -->
-                        <div id="extended-widget-opts-visibility-tab-<?php echo $args['id']; ?>-misc" class="extended-widget-opts-visibility-tabcontent extended-widget-opts-inner-tabcontent">
-                            <div class="extended-widget-opts-misc">
+                        <div id="advanced-widget-control-visibility-tab-<?php echo $args['id']; ?>-misc" class="advanced-widget-control-visibility-tabcontent advanced-widget-control-inner-tabcontent">
+                            <div class="advanced-widget-control-misc">
                                 <?php foreach ($misc as $key => $value) {
                                     if (isset($misc_values[$key]) && $misc_values[$key] == '1') {
                                         $checked = 'checked="checked"';
@@ -225,7 +225,7 @@ function widgetcontrol_tabcontent_visibility($args)
                                     }
                                 ?>
                                     <p>
-                                        <input type="checkbox" name="<?php echo $args['namespace']; ?>[extended_widget_opts][visibility][misc][<?php echo $key; ?>]" id="<?php echo $args['id']; ?>-opts-misc-<?php echo $key; ?>" value="1" <?php echo $checked; ?> />
+                                        <input type="checkbox" name="<?php echo $args['namespace']; ?>[advanced_widget_control][visibility][misc][<?php echo $key; ?>]" id="<?php echo $args['id']; ?>-opts-misc-<?php echo $key; ?>" value="1" <?php echo $checked; ?> />
                                         <label for="<?php echo $args['id']; ?>-opts-misc-<?php echo $key; ?>"><?php echo $value; ?></label>
                                     </p>
                                 <?php } ?>
@@ -234,18 +234,18 @@ function widgetcontrol_tabcontent_visibility($args)
                     <?php } ?>
 
                     <?php if (
-                        isset($widget_options['settings']['visibility']) &&
-                        isset($widget_options['settings']['visibility']['post_type']) &&
-                        '1' == $widget_options['settings']['visibility']['post_type']
+                        isset($widget_control['settings']['visibility']) &&
+                        isset($widget_control['settings']['visibility']['post_type']) &&
+                        '1' == $widget_control['settings']['visibility']['post_type']
                     ) { ?>
                         <!--  start types tab content -->
-                        <div id="extended-widget-opts-visibility-tab-<?php echo $args['id']; ?>-types" class="extended-widget-opts-visibility-tabcontent extended-widget-opts-inner-tabcontent extended-widget-opts-tabcontent-pages">
-                            <div class="extended-widget-opts-inner-lists" style="height: 230px;padding: 5px;overflow:auto;">
-                                <h4 id="extended-widget-opts-pages"><?php _e('Pages', 'advanced-widget-control'); ?><br>
+                        <div id="advanced-widget-control-visibility-tab-<?php echo $args['id']; ?>-types" class="advanced-widget-control-visibility-tabcontent advanced-widget-control-inner-tabcontent advanced-widget-control-tabcontent-pages">
+                            <div class="advanced-widget-control-inner-lists" style="height: 230px;padding: 5px;overflow:auto;">
+                                <h4 id="advanced-widget-control-pages"><?php _e('Pages', 'advanced-widget-control'); ?><br>
                                     <small>Type at least 3 characters to initiate the search</small>
                                 </h4>
-                                <div class="extended-widget-opts-pages">
-                                    <select class="widefat extended-widget-opts-select2-dropdown extended-widget-opts-select2-page-dropdown" name="<?php echo $args['namespace']; ?>[extended_widget_opts][visibility][pages][]" data-namespace="<?php echo $args['namespace']; ?>" multiple="multiple">
+                                <div class="advanced-widget-control-pages">
+                                    <select class="widefat advanced-widget-control-select2-dropdown advanced-widget-control-select2-page-dropdown" name="<?php echo $args['namespace']; ?>[advanced_widget_control][visibility][pages][]" data-namespace="<?php echo $args['namespace']; ?>" multiple="multiple">
                                         <?php if (!empty($pages_values)) {
                                             $pageLoop  = get_pages(['hierarchical' => false, 'include' => $pages_values]);
                                             foreach ($pageLoop as $objPage) {
@@ -264,8 +264,8 @@ function widgetcontrol_tabcontent_visibility($args)
                                     ?>
                                 </div>
 
-                                <h4 id="extended-widget-opts-types"><?php _e('Post Types', 'advanced-widget-control'); ?></h4>
-                                <div class="extended-widget-opts-types">
+                                <h4 id="advanced-widget-control-types"><?php _e('Post Types', 'advanced-widget-control'); ?></h4>
+                                <div class="advanced-widget-control-types">
                                     <?php foreach ($types as $ptype => $type) {
 
                                         if (isset($types_values[$ptype]) && $types_values[$ptype] == '1') {
@@ -275,7 +275,7 @@ function widgetcontrol_tabcontent_visibility($args)
                                         }
                                     ?>
                                         <p>
-                                            <input type="checkbox" name="<?php echo $args['namespace']; ?>[extended_widget_opts][visibility][types][<?php echo $ptype; ?>]" id="<?php echo $args['id']; ?>-opts-types-<?php echo $ptype; ?>" value="1" <?php echo $checked; ?> />
+                                            <input type="checkbox" name="<?php echo $args['namespace']; ?>[advanced_widget_control][visibility][types][<?php echo $ptype; ?>]" id="<?php echo $args['id']; ?>-opts-types-<?php echo $ptype; ?>" value="1" <?php echo $checked; ?> />
                                             <label for="<?php echo $args['id']; ?>-opts-types-<?php echo $ptype; ?>"><?php echo stripslashes($type->labels->name); ?></label>
                                         </p>
                                     <?php } ?>
@@ -285,18 +285,18 @@ function widgetcontrol_tabcontent_visibility($args)
                     <?php } ?>
 
                     <?php if (
-                        isset($widget_options['settings']['visibility']) &&
-                        isset($widget_options['settings']['visibility']['taxonomies']) &&
-                        '1' == $widget_options['settings']['visibility']['taxonomies']
+                        isset($widget_control['settings']['visibility']) &&
+                        isset($widget_control['settings']['visibility']['taxonomies']) &&
+                        '1' == $widget_control['settings']['visibility']['taxonomies']
                     ) { ?>
                         <!--  start tax tab content -->
-                        <div id="extended-widget-opts-visibility-tab-<?php echo $args['id']; ?>-tax" class="extended-widget-opts-visibility-tabcontent extended-widget-opts-inner-tabcontent extended-widget-opts-tabcontent-taxonomies">
-                            <div class="extended-widget-opts-inner-lists" style="height: 230px;padding: 5px;overflow:auto;">
-                                <h4 id="extended-widget-opts-categories"><?php _e('Categories', 'advanced-widget-control'); ?><br>
+                        <div id="advanced-widget-control-visibility-tab-<?php echo $args['id']; ?>-tax" class="advanced-widget-control-visibility-tabcontent advanced-widget-control-inner-tabcontent advanced-widget-control-tabcontent-taxonomies">
+                            <div class="advanced-widget-control-inner-lists" style="height: 230px;padding: 5px;overflow:auto;">
+                                <h4 id="advanced-widget-control-categories"><?php _e('Categories', 'advanced-widget-control'); ?><br>
                                     <small>Type at least 3 characters to initiate the search for a Category term</small>
                                 </h4>
-                                <div class="extended-widget-opts-categories">
-                                    <select class="widefat extended-widget-opts-select2-dropdown extended-widget-opts-select2-taxonomy-dropdown" name="<?php echo $args['namespace']; ?>[extended_widget_opts][visibility][categories][]" data-taxonomy="category" data-namespace="<?php echo $args['namespace']; ?>" multiple="multiple">
+                                <div class="advanced-widget-control-categories">
+                                    <select class="widefat advanced-widget-control-select2-dropdown advanced-widget-control-select2-taxonomy-dropdown" name="<?php echo $args['namespace']; ?>[advanced_widget_control][visibility][categories][]" data-taxonomy="category" data-namespace="<?php echo $args['namespace']; ?>" multiple="multiple">
                                         <?php if (!empty($term_values)) {
                                             $taxLoop  = get_terms(['taxonomy' => 'category', 'include' => $term_values, 'hide_empty' => false]);
                                             foreach ($taxLoop as $objTax) {
@@ -306,8 +306,8 @@ function widgetcontrol_tabcontent_visibility($args)
                                     </select>
                                 </div>
 
-                                <h4 id="extended-widget-opts-taxonomies"><?php _e('Taxonomies', 'advanced-widget-control'); ?></h4>
-                                <div class="extended-widget-opts-taxonomies">
+                                <h4 id="advanced-widget-control-taxonomies"><?php _e('Taxonomies', 'advanced-widget-control'); ?></h4>
+                                <div class="advanced-widget-control-taxonomies">
                                     <?php foreach ($taxonomies as $taxonomy) {
                                         if (isset($tax_values[$taxonomy->name]) && $tax_values[$taxonomy->name] == '1') {
                                             $checked = 'checked="checked"';
@@ -316,7 +316,7 @@ function widgetcontrol_tabcontent_visibility($args)
                                         }
                                     ?>
                                         <p>
-                                            <input type="checkbox" name="<?php echo $args['namespace']; ?>[extended_widget_opts][visibility][taxonomies][<?php echo $taxonomy->name; ?>]" id="<?php echo $args['id']; ?>-opts-taxonomies-<?php echo $taxonomy->name; ?>" value="1" <?php echo $checked; ?> />
+                                            <input type="checkbox" name="<?php echo $args['namespace']; ?>[advanced_widget_control][visibility][taxonomies][<?php echo $taxonomy->name; ?>]" id="<?php echo $args['id']; ?>-opts-taxonomies-<?php echo $taxonomy->name; ?>" value="1" <?php echo $checked; ?> />
                                             <label for="<?php echo $args['id']; ?>-opts-taxonomies-<?php echo $taxonomy->name; ?>"><?php echo $taxonomy->label; ?></label> <?php if (isset($taxonomy->object_type) && isset($taxonomy->object_type[0])) {
                                                                                                                                                                                 echo ' <small>- ' . $taxonomy->object_type[0] . '</small>';
                                                                                                                                                                             } ?>
@@ -326,14 +326,14 @@ function widgetcontrol_tabcontent_visibility($args)
                             </div>
                         </div><!--  end tax tab content -->
                     <?php } ?>
-                </div><!--  end .extended-widget-opts-visibility-tabs -->
+                </div><!--  end .advanced-widget-control-visibility-tabs -->
             </div><!-- End WordPress Pages tab -->
         </div><!--  end main tab -->
 
     </div>
 <?php
 }
-add_action('extended_widget_opts_tabcontent', 'widgetcontrol_tabcontent_visibility');
+add_action('advanced_widget_control_tabcontent', 'widgetcontrol_tabcontent_visibility');
 
 // Page Options
 function widgetcontrol_ajax_page_search()

@@ -16,19 +16,19 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  */
 
  /**
- * Called on 'extended_widget_opts_tabs'
+ * Called on 'advanced_widget_control_tabs'
  * create new tab navigation for alignment options
  */
 function widgetcontrol_tab_state( $args ){ ?>
-    <li class="extended-widget-opts-tab-roles">
-        <a href="#extended-widget-opts-tab-<?php echo $args['id'];?>-roles" title="<?php _e( 'Roles', 'advanced-widget-control' );?>" ><span class="dashicons dashicons-admin-users"></span> <span class="tabtitle"><?php _e( 'Roles', 'advanced-widget-control' );?></span></a>
+    <li class="advanced-widget-control-tab-roles">
+        <a href="#advanced-widget-control-tab-<?php echo $args['id'];?>-roles" title="<?php _e( 'Roles', 'advanced-widget-control' );?>" ><span class="dashicons dashicons-admin-users"></span> <span class="tabtitle"><?php _e( 'Roles', 'advanced-widget-control' );?></span></a>
     </li>
 <?php
 }
-add_action( 'extended_widget_opts_tabs', 'widgetcontrol_tab_state' );
+add_action( 'advanced_widget_control_tabs', 'widgetcontrol_tab_state' );
 
 /**
- * Called on 'extended_widget_opts_tabcontent'
+ * Called on 'advanced_widget_control_tabcontent'
  * create new tab content options for alignment options
  */
 function widgetcontrol_tabcontent_state( $args ){
@@ -38,10 +38,10 @@ function widgetcontrol_tabcontent_state( $args ){
         $state = $args['params']['roles'][ 'state' ];
     }
     ?>
-    <div id="extended-widget-opts-tab-<?php echo $args['id'];?>-roles" class="extended-widget-opts-tabcontent extended-widget-opts-tabcontent-roles">
+    <div id="advanced-widget-control-tab-<?php echo $args['id'];?>-roles" class="advanced-widget-control-tabcontent advanced-widget-control-tabcontent-roles">
         <p class="widgetcontrol-subtitle"><?php _e( 'User Login State', 'advanced-widget-control' );?></p>
         <p>
-            <select class="widefat" name="<?php echo $args['namespace'];?>[extended_widget_opts][roles][state]">
+            <select class="widefat" name="<?php echo $args['namespace'];?>[advanced_widget_control][roles][state]">
                 <option value=""><?php _e( 'Select Visibility Option', 'advanced-widget-control' );?></option>
                 <option value="in" <?php if( $state == 'in' ){ echo 'selected="selected"'; }?> ><?php _e( 'Show only for Logged-in Users', 'advanced-widget-control' );?></option>
                 <option value="out" <?php if( $state == 'out' ){ echo 'selected="selected"'; }?>><?php _e( 'Show only for Logged-out Users', 'advanced-widget-control' );?></option>
@@ -52,4 +52,4 @@ function widgetcontrol_tabcontent_state( $args ){
     </div>
 <?php
 }
-add_action( 'extended_widget_opts_tabcontent', 'widgetcontrol_tabcontent_state'); ?>
+add_action( 'advanced_widget_control_tabcontent', 'widgetcontrol_tabcontent_state'); ?>

@@ -12,7 +12,7 @@ if (!defined('ABSPATH')) exit;
  * Handles widget_display_callback filter
  *
  * @since 1.0
- * @global $widget_options
+ * @global $widget_control
  * @return $instance
  */
 
@@ -20,7 +20,7 @@ if (!defined('ABSPATH')) exit;
 if (!function_exists('widgetcontrol_display_callback')) :
     function widgetcontrol_display_callback($instance, $widget, $args)
     {
-        global $widget_options, $current_user;
+        global $widget_control, $current_user;
 
         // WPML FIX
         $hasWPML = has_filter('wpml_current_language');
@@ -28,16 +28,16 @@ if (!function_exists('widgetcontrol_display_callback')) :
         $default_language = $hasWPML ? apply_filters('wpml_default_language', NULL) : false;
 
         $hidden     = false;
-        $opts       = (isset($instance['extended_widget_opts-' . $widget->id])) ? $instance['extended_widget_opts-' . $widget->id] : array();
+        $opts       = (isset($instance['advanced_widget_control-' . $widget->id])) ? $instance['advanced_widget_control-' . $widget->id] : array();
         $visibility = array('show' => array(), 'hide' => array());
 
         //wordpress pages
         $visibility         = isset($opts['visibility']) ? $opts['visibility'] : array();
         $visibility_opts    = isset($opts['visibility']['options']) ? $opts['visibility']['options'] : 'hide';
 
-        $is_misc    = ('activate' == $widget_options['visibility'] && isset($widget_options['settings']['visibility']) && isset($widget_options['settings']['visibility']['misc'])) ? true : false;
-        $is_types   = ('activate' == $widget_options['visibility'] && isset($widget_options['settings']['visibility']) && isset($widget_options['settings']['visibility']['post_type'])) ? true : false;
-        $is_tax     = ('activate' == $widget_options['visibility'] && isset($widget_options['settings']['visibility']) && isset($widget_options['settings']['visibility']['taxonomies'])) ? true : false;
+        $is_misc    = ('activate' == $widget_control['visibility'] && isset($widget_control['settings']['visibility']) && isset($widget_control['settings']['visibility']['misc'])) ? true : false;
+        $is_types   = ('activate' == $widget_control['visibility'] && isset($widget_control['settings']['visibility']) && isset($widget_control['settings']['visibility']['post_type'])) ? true : false;
+        $is_tax     = ('activate' == $widget_control['visibility'] && isset($widget_control['settings']['visibility']) && isset($widget_control['settings']['visibility']['taxonomies'])) ? true : false;
 
         $isWooPage = false;
         if (class_exists('WooCommerce')) {
@@ -55,7 +55,7 @@ if (!function_exists('widgetcontrol_display_callback')) :
                 }
 
                 //do return to bypass other conditions
-                $hidden = apply_filters('widget_options_visibility_page', $hidden);
+                $hidden = apply_filters('widget_control_visibility_page', $hidden);
 
                 if ($hidden) {
                     return false;
@@ -73,7 +73,7 @@ if (!function_exists('widgetcontrol_display_callback')) :
                 }
 
                 //do return to bypass other conditions
-                $hidden = apply_filters('widget_options_visibility_home', $hidden);
+                $hidden = apply_filters('widget_control_visibility_home', $hidden);
                 if ($hidden) {
                     return false;
                 }
@@ -85,7 +85,7 @@ if (!function_exists('widgetcontrol_display_callback')) :
                 }
 
                 //do return to bypass other conditions
-                $hidden = apply_filters('widget_options_visibility_blog', $hidden);
+                $hidden = apply_filters('widget_control_visibility_blog', $hidden);
                 if ($hidden) {
                     return false;
                 }
@@ -123,7 +123,7 @@ if (!function_exists('widgetcontrol_display_callback')) :
                 }
 
                 //do return to bypass other conditions
-                $hidden = apply_filters('widget_options_visibility_categories', $hidden);
+                $hidden = apply_filters('widget_control_visibility_categories', $hidden);
                 if ($hidden) {
                     return false;
                 }
@@ -141,7 +141,7 @@ if (!function_exists('widgetcontrol_display_callback')) :
                 }
 
                 //do return to bypass other conditions
-                $hidden = apply_filters('widget_options_visibility_tags', $hidden);
+                $hidden = apply_filters('widget_control_visibility_tags', $hidden);
                 if ($hidden) {
                     return false;
                 }
@@ -158,7 +158,7 @@ if (!function_exists('widgetcontrol_display_callback')) :
                 }
 
                 //do return to bypass other conditions
-                $hidden = apply_filters('widget_options_visibility_taxonomies', $hidden);
+                $hidden = apply_filters('widget_control_visibility_taxonomies', $hidden);
                 if ($hidden) {
                     return false;
                 }
@@ -170,7 +170,7 @@ if (!function_exists('widgetcontrol_display_callback')) :
                 }
 
                 //do return to bypass other conditions
-                $hidden = apply_filters('widget_options_visibility_archives', $hidden);
+                $hidden = apply_filters('widget_control_visibility_archives', $hidden);
                 if ($hidden) {
                     return false;
                 }
@@ -182,7 +182,7 @@ if (!function_exists('widgetcontrol_display_callback')) :
                 }
 
                 //do return to bypass other conditions
-                $hidden = apply_filters('widget_options_visibility_404', $hidden);
+                $hidden = apply_filters('widget_control_visibility_404', $hidden);
                 if ($hidden) {
                     return false;
                 }
@@ -194,7 +194,7 @@ if (!function_exists('widgetcontrol_display_callback')) :
                 }
 
                 //do return to bypass other conditions
-                $hidden = apply_filters('widget_options_visibility_search', $hidden);
+                $hidden = apply_filters('widget_control_visibility_search', $hidden);
                 if ($hidden) {
                     return false;
                 }
@@ -211,7 +211,7 @@ if (!function_exists('widgetcontrol_display_callback')) :
                     $hidden = true; //hide if doesn't exists on visible pages
                 }
                 // do return to bypass other conditions
-                $hidden = apply_filters('widget_options_visibility_types', $hidden);
+                $hidden = apply_filters('widget_control_visibility_types', $hidden);
                 //hide posts assign on category
                 if (!isset($visibility['categories'])) {
                     $visibility['categories'] = array();
@@ -234,7 +234,7 @@ if (!function_exists('widgetcontrol_display_callback')) :
                     }
                 }
                 // do return to bypass other conditions
-                $hidden = apply_filters('widget_options_visibility_post_category', $hidden);
+                $hidden = apply_filters('widget_control_visibility_post_category', $hidden);
                 if ($hidden) {
                     return false;
                 }
@@ -282,7 +282,7 @@ if (!function_exists('widgetcontrol_display_callback')) :
                     }
                 }
                 //do return to bypass other conditions
-                $hidden = apply_filters('widget_options_visibility_page', $hidden);
+                $hidden = apply_filters('widget_control_visibility_page', $hidden);
                 if ($hidden) {
                     return false;
                 }
@@ -291,7 +291,7 @@ if (!function_exists('widgetcontrol_display_callback')) :
         //end wordpress pages
 
         //login state
-        if (isset($widget_options['state']) && 'activate' == $widget_options['state'] && isset($opts['roles'])) {
+        if (isset($widget_control['state']) && 'activate' == $widget_control['state'] && isset($opts['roles'])) {
             if (isset($opts['roles']['state']) && !empty($opts['roles']['state'])) {
                 //do state action here
                 if ($opts['roles']['state'] == 'out' && is_user_logged_in()) {
@@ -302,12 +302,12 @@ if (!function_exists('widgetcontrol_display_callback')) :
             }
         }
 
-        if ('activate' == $widget_options['logic']) {
+        if ('activate' == $widget_control['logic']) {
             // display widget logic
             if (isset($opts['class']) && isset($opts['class']['logic']) && !empty($opts['class']['logic'])) {
                 $display_logic = stripslashes(trim($opts['class']['logic']));
-                $display_logic = apply_filters('widget_options_logic_override', $display_logic);
-                $display_logic = apply_filters('extended_widget_options_logic_override', $display_logic);
+                $display_logic = apply_filters('widget_control_logic_override', $display_logic);
+                $display_logic = apply_filters('extended_widget_control_logic_override', $display_logic);
                 if ($display_logic === false) {
                     return false;
                 }
@@ -328,7 +328,7 @@ if (!function_exists('widgetcontrol_display_callback')) :
             }
         }
 
-        if ('activate' == $widget_options['hide_title']) {
+        if ('activate' == $widget_control['hide_title']) {
             //hide widget title
             if (isset($instance['title']) && isset($opts['class']) && isset($opts['class']['title']) && '1' == $opts['class']['title']) {
                 $instance['title'] = '';
@@ -344,10 +344,10 @@ endif;
 if (!function_exists('widgetcontrol_remove_title')) :
     function widgetcontrol_remove_title($widget_title, $instance = array(), $widget_id = '')
     {
-        global $widget_options;
-        if ('activate' == $widget_options['hide_title'] && is_array($instance) && !empty($instance)) {
+        global $widget_control;
+        if ('activate' == $widget_control['hide_title'] && is_array($instance) && !empty($instance)) {
             foreach ($instance as $key => $value) {
-                if (substr($key, 0, 20) == 'extended_widget_opts') {
+                if (substr($key, 0, 20) == 'advanced_widget_control') {
                     $opts       = (isset($instance[$key])) ? $instance[$key] : array();
 
                     if (isset($opts['class']) && isset($opts['class']['title']) && '1' == $opts['class']['title']) {
@@ -371,7 +371,7 @@ endif;
 if (!function_exists('widgetcontrol_add_classes')) :
     function widgetcontrol_add_classes($params)
     {
-        global $widget_options, $wp_registered_widget_controls;
+        global $widget_control, $wp_registered_widget_controls;
         $classe_to_add  = '';
         $id_base        = $wp_registered_widget_controls[$params[0]['widget_id']]['id_base'];
         $instance       = get_option('widget_' . $id_base);
@@ -385,7 +385,7 @@ if (!function_exists('widgetcontrol_add_classes')) :
             }
         }
         if (isset($instance[$num])) {
-            $opts           = (isset($instance[$num]['extended_widget_opts-' . $params[0]['widget_id']])) ? $instance[$num]['extended_widget_opts-' . $params[0]['widget_id']] : array();
+            $opts           = (isset($instance[$num]['advanced_widget_control-' . $params[0]['widget_id']])) ? $instance[$num]['advanced_widget_control-' . $params[0]['widget_id']] : array();
         } else {
             $opts = array();
         }
@@ -393,9 +393,9 @@ if (!function_exists('widgetcontrol_add_classes')) :
         $custom_class   = isset($opts['class']) ? $opts['class'] : '';
         $widget_id_set  = $params[0]['widget_id'];
 
-        if ('activate' == $widget_options['classes'] && isset($widget_options['settings']['classes'])) {
+        if ('activate' == $widget_control['classes'] && isset($widget_control['settings']['classes'])) {
             //don't add the IDs when the setting is set to NO
-            if (isset($widget_options['settings']['classes']['id'])) {
+            if (isset($widget_control['settings']['classes']['id'])) {
                 if (is_array($custom_class) && isset($custom_class['id']) && !empty($custom_class['id'])) {
                     $params[0]['before_widget'] = preg_replace('/id="[^"]*/', "id=\"{$custom_class['id']}", $params[0]['before_widget'], 1);
                     $widget_id_set = $custom_class['id'];
@@ -403,15 +403,15 @@ if (!function_exists('widgetcontrol_add_classes')) :
             }
         }
 
-        $get_classes = widgetcontrol_classes_generator($opts, $widget_options, $widget_options['settings']);
+        $get_classes = widgetcontrol_classes_generator($opts, $widget_control, $widget_control['settings']);
 
         //double check array
         if (!is_array($get_classes)) {
             $get_classes = array();
         }
 
-        if ('activate' == $widget_options['classes']) {
-            if (isset($widget_options['settings']['classes']['auto'])) {
+        if ('activate' == $widget_control['classes']) {
+            if (isset($widget_control['settings']['classes']['auto'])) {
                 //do nothing
             } else {
                 //check if widget class exists

@@ -1,10 +1,10 @@
 <?php
 /**
  * Add Advanced Widget Control
- *
  * Process Managing of Advanced Widget Control.
- *
+ * File: includes/widgets/widgets.php
  */
+
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
@@ -15,8 +15,8 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  */
 if( !function_exists( 'widgetcontrol_add_search_input' ) ):
     function widgetcontrol_add_search_input() {
-        global $widget_options;
-        if( isset( $widget_options['search'] ) && 'activate' == $widget_options['search'] ): ?>
+        global $widget_control;
+        if( isset( $widget_control['search'] ) && 'activate' == $widget_control['search'] ): ?>
             <div id="widgetcontrol-widgets-filter">
             	<label class="screen-reader-text" for="widgetcontrol-widgets-search"><?php _e( 'Search Widgets', 'advanced-widget-control' ); ?></label>
             	<input type="text" id="widgetcontrol-widgets-search" class="widgetcontrol-widgets-search" placeholder="<?php esc_attr_e( 'Search widgets&hellip;', 'advanced-widget-control' ) ?>" />
@@ -38,19 +38,19 @@ endif;
  */
 
 function widgetcontrol_in_widget_form( $widget, $return, $instance ){
-    global $widget_options, $wp_registered_widget_controls;
+    global $widget_control, $wp_registered_widget_controls;
     $width          = ( isset( $wp_registered_widget_controls[$widget->id]['width'] ) ) ? (int) $wp_registered_widget_controls[ $widget->id]['width' ]  : 250;
-    $opts           = ( isset( $instance[ 'extended_widget_opts-'. $widget->id ] ) )    ? $instance[ 'extended_widget_opts-'. $widget->id ]             : array();
+    $opts           = ( isset( $instance[ 'advanced_widget_control-'. $widget->id ] ) )    ? $instance[ 'advanced_widget_control-'. $widget->id ]             : array();
 
     if( isset( $widget->id ) && 'temp' == $widget->id ){
         $namespace  = 'widgets['. $widget->number .']';
-        $optsname   = 'widgets['. $widget->number .'][extended_widget_opts_name]';
-        $opts       = ( isset( $instance[ 'extended_widget_opts' ] ) ) ? $instance[ 'extended_widget_opts'] : array();
+        $optsname   = 'widgets['. $widget->number .'][advanced_widget_control_name]';
+        $opts       = ( isset( $instance[ 'advanced_widget_control' ] ) ) ? $instance[ 'advanced_widget_control'] : array();
         $widget->id = $widget->number;
 
     } else {
-        $namespace = 'extended_widget_opts-'. $widget->id;
-        $optsname  = 'extended_widget_opts_name';
+        $namespace = 'advanced_widget_control-'. $widget->id;
+        $optsname  = 'advanced_widget_control_name';
     }
 
     $args = array(
@@ -66,20 +66,20 @@ function widgetcontrol_in_widget_form( $widget, $return, $instance ){
 
     ?>
 
-    <input type="hidden" name="extended_widget_opts_name" value="extended_widget_opts-<?php echo $widget->id;?>">
-    <input type="hidden" name="<?php echo $args['namespace'];?>[extended_widget_opts][id_base]" value="<?php echo $widget->id;?>" />
-    <div class="extended-widget-opts-form <?php if( $width > 480 ){ echo 'extended-widget-opts-form-large'; }else if( $width <= 480 ){ echo 'extended-widget-opts-form-small'; }?>">
-        <div class="extended-widget-opts-tabs">
-            <ul class="extended-widget-opts-tabnav-ul">
-                <?php do_action( 'extended_widget_opts_tabs', $args );?>
-                <div class="extended-widget-opts-clearfix"></div>
+    <input type="hidden" name="advanced_widget_control_name" value="advanced_widget_control-<?php echo $widget->id;?>">
+    <input type="hidden" name="<?php echo $args['namespace'];?>[advanced_widget_control][id_base]" value="<?php echo $widget->id;?>" />
+    <div class="advanced-widget-control-form <?php if( $width > 480 ){ echo 'advanced-widget-control-form-large'; }else if( $width <= 480 ){ echo 'advanced-widget-control-form-small'; }?>">
+        <div class="advanced-widget-control-tabs">
+            <ul class="advanced-widget-control-tabnav-ul">
+                <?php do_action( 'advanced_widget_control_tabs', $args );?>
+                <div class="advanced-widget-control-clearfix"></div>
             </ul>
 
-            <?php do_action( 'extended_widget_opts_tabcontent', $args );?>
-            <input type="hidden" id="extended-widget-opts-selectedtab" value="<?php echo $selected;?>" name="extended_widget_opts-<?php echo $args['id'];?>[extended_widget_opts][tabselect]" />
-            <div class="extended-widget-opts-clearfix"></div>
-        </div><!--  end .extended-widget-opts-tabs -->
-    </div><!-- end .extended-widget-opts-form -->
+            <?php do_action( 'advanced_widget_control_tabcontent', $args );?>
+            <input type="hidden" id="advanced-widget-control-selectedtab" value="<?php echo $selected;?>" name="advanced_widget_control-<?php echo $args['id'];?>[advanced_widget_control][tabselect]" />
+            <div class="advanced-widget-control-clearfix"></div>
+        </div><!--  end .advanced-widget-control-tabs -->
+    </div><!-- end .advanced-widget-control-form -->
 
     <?php
  }
@@ -89,17 +89,17 @@ function widgetcontrol_in_widget_form( $widget, $return, $instance ){
  * Update Options
  */
 function widgetcontrol_ajax_update_callback( $instance, $new_instance, $this_widget){
-    global $widget_options;
+    global $widget_control;
 
-    if( isset($_POST['extended_widget_opts_name']) ) {
-        $name 		= strip_tags( $_POST['extended_widget_opts_name'] );
+    if( isset($_POST['advanced_widget_control_name']) ) {
+        $name 		= strip_tags( $_POST['advanced_widget_control_name'] );
         $options 	= $_POST[ $name ];
-        if( isset( $options['extended_widget_opts'] ) ){
+        if( isset( $options['advanced_widget_control'] ) ){
 
-            if( isset( $options['extended_widget_opts']['class']['link'] ) && !empty( $options['extended_widget_opts']['class']['link'] ) ){
-                $options['extended_widget_opts']['class']['link'] = widgetcontrol_addhttp( $options['extended_widget_opts']['class']['link'] );
+            if( isset( $options['advanced_widget_control']['class']['link'] ) && !empty( $options['advanced_widget_control']['class']['link'] ) ){
+                $options['advanced_widget_control']['class']['link'] = widgetcontrol_addhttp( $options['advanced_widget_control']['class']['link'] );
             }
-            $instance[ $name ] = widgetcontrol_sanitize_array( $options['extended_widget_opts'] );
+            $instance[ $name ] = widgetcontrol_sanitize_array( $options['advanced_widget_control'] );
 
         }
     }

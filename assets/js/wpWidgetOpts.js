@@ -14,7 +14,7 @@ wpWidgetOpts = {
 	init : function() {
 		var self  			= this,
 			title 			= $( '.wp-admin.widgets-php .wrap a.page-title-action' ),
-			tabs  			= $( '.extended-widget-opts-tabs' ),
+			tabs  			= $( '.advanced-widget-control-tabs' ),
 			chooser 		= $( '.widgetsopts-chooser' ),
 			selectSidebar 	= chooser.find( '.widgetcontrol-chooser-sidebars' );
 			// ta = chooser.find('.widgets-chooser-sidebars'),
@@ -41,14 +41,14 @@ wpWidgetOpts = {
 			});
 
 			//toggle accordions
-			$document.on( 'click', '.extended-widget-opts-inner-lists h4',function(){
+			$document.on( 'click', '.advanced-widget-control-inner-lists h4',function(){
 				var getid = $(this).attr('id');
-				$( '.extended-widget-opts-inner-lists .'+ getid ).slideToggle(250);
+				$( '.advanced-widget-control-inner-lists .'+ getid ).slideToggle(250);
 			} );
 
 			//toggle widget logic notice
-			$document.on( 'click', '.widget-opts-toggler-note',function(e){
-				$( this ).parent( 'p' ).parent( '.widget-opts-logic' ).find( '.widget-opts-toggle-note' ).slideToggle( 250 );
+			$document.on( 'click', '.widget-ctrl-toggler-note',function(e){
+				$( this ).parent( 'p' ).parent( '.widget-ctrl-logic' ).find( '.widget-ctrl-toggle-note' ).slideToggle( 250 );
 				e.preventDefault();
 				e.stopPropagation();
 			} );
@@ -77,16 +77,16 @@ wpWidgetOpts = {
 		selected_visibility = 0,
 		selected_settings 	= 0,
 		in_customizer 		= false,
-		tabs 				= '.extended-widget-opts-tabs',
-		styling_tabs 		= '.extended-widget-opts-styling-tabs',
-		visibility_main 	= '.extended-widget-opts-visibility-m-tabs',
-		visibility_tabs 	= '.extended-widget-opts-visibility-tabs',
-		settings_tabs 		= '.extended-widget-opts-settings-tabs',
-		selectedtab			= '#extended-widget-opts-selectedtab',
-		selectedstyling		= '#extended-widget-opts-styling-selectedtab',
-		selectedmain		= '#extended-widget-opts-visibility-m-selectedtab',
-		selectedvisibility	= '#extended-widget-opts-visibility-selectedtab',
-		selectedsettings	= '#extended-widget-opts-settings-selectedtab';
+		tabs 				= '.advanced-widget-control-tabs',
+		styling_tabs 		= '.advanced-widget-control-styling-tabs',
+		visibility_main 	= '.advanced-widget-control-visibility-m-tabs',
+		visibility_tabs 	= '.advanced-widget-control-visibility-tabs',
+		settings_tabs 		= '.advanced-widget-control-settings-tabs',
+		selectedtab			= '#advanced-widget-control-selectedtab',
+		selectedstyling		= '#advanced-widget-control-styling-selectedtab',
+		selectedmain		= '#advanced-widget-control-visibility-m-selectedtab',
+		selectedvisibility	= '#advanced-widget-control-visibility-selectedtab',
+		selectedsettings	= '#advanced-widget-control-settings-selectedtab';
 
 		// check for wp.customize return boolean
 	    if ( typeof wp !== 'undefined' ) {
@@ -440,10 +440,10 @@ wpWidgetOpts = {
 		}
 
 		if ( widget_id != '' ) {
-			$( widget_id ).find( '.extended-widget-opts-select2-page-dropdown' ).select2(args);
+			$( widget_id ).find( '.advanced-widget-control-select2-page-dropdown' ).select2(args);
 		}
 		else {
-			$( '.widget-liquid-right .extended-widget-opts-select2-page-dropdown' ).select2(args);
+			$( '.widget-liquid-right .advanced-widget-control-select2-page-dropdown' ).select2(args);
 		}
 	},
 	initTaxonomyDropdown : function(widget_id) {
@@ -473,10 +473,10 @@ wpWidgetOpts = {
 		}
 
 		if ( widget_id != '' ) {
-			$( widget_id ).find( '.extended-widget-opts-select2-taxonomy-dropdown' ).select2(args);
+			$( widget_id ).find( '.advanced-widget-control-select2-taxonomy-dropdown' ).select2(args);
 		}
 		else {
-			$( '.widget-liquid-right .extended-widget-opts-select2-taxonomy-dropdown' ).select2(args);
+			$( '.widget-liquid-right .advanced-widget-control-select2-taxonomy-dropdown' ).select2(args);
 		}
 	}
 };
