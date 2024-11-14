@@ -1,9 +1,8 @@
 <?php
 /**
  * AJAX Functions
- *
  * Process AJAX actions.
- *
+ * File: includes/ajax-functions.php
  */
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
@@ -57,7 +56,7 @@ function widgetcontrol_ajax_save_settings(){
 	$response 				= (object) $response;
 
 	//let devs do there action
-	do_action( 'widget_options_before_ajax_print', sanitize_text_field( $_POST['method'] ) );
+	do_action( 'widget_control_before_ajax_print', sanitize_text_field( $_POST['method'] ) );
 
 	echo json_encode( $response );
 	die();
