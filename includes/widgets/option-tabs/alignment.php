@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  */
 
  /**
- * Called on 'extended_widget_opts_tabs'
+ * Called on 'advanced_widget_control_tabs'
  * create new tab navigation for alignment options
  */
 
@@ -28,7 +28,7 @@ function widgetcontrol_tabcontent_alignment( $args ){
         }
     }
     ?>
-    <div id="extended-widget-opts-tab-<?php echo $args['id'];?>-alignment" class="extended-widget-opts-tabcontent extended-widget-opts-tabcontent-alignment">
+    <div id="advanced-widget-control-tab-<?php echo $args['id'];?>-alignment" class="advanced-widget-control-tabcontent advanced-widget-control-tabcontent-alignment">
         <table class="form-table">
             <tbody>
                 <tr valign="top">
@@ -38,7 +38,7 @@ function widgetcontrol_tabcontent_alignment( $args ){
                 <tr valign="top">
                     <td scope="row"><span class="dashicons dashicons-desktop"></span> <?php _e( 'All Devices', 'advanced-widget-control' );?></td>
                     <td>
-                        <select class="widefat" name="<?php echo $args['namespace'];?>[extended_widget_opts][alignment][desktop]">
+                        <select class="widefat" name="<?php echo $args['namespace'];?>[advanced_widget_control][alignment][desktop]">
                             <option value="default"><?php _e( 'Default', 'advanced-widget-control' );?></option>
                             <option value="center" <?php if( $desktop == 'center' ){ echo 'selected="selected"'; }?> ><?php _e( 'Center', 'advanced-widget-control' );?></option>
                             <option value="left" <?php if( $desktop == 'left' ){ echo 'selected="selected"'; }?>><?php _e( 'Left', 'advanced-widget-control' );?></option>
@@ -52,4 +52,4 @@ function widgetcontrol_tabcontent_alignment( $args ){
     </div>
 <?php
 }
-add_action( 'extended_widget_opts_tabcontent', 'widgetcontrol_tabcontent_alignment'); ?>
+add_action( 'advanced_widget_control_tabcontent', 'widgetcontrol_tabcontent_alignment'); ?>
